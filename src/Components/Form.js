@@ -14,7 +14,7 @@ const Form = () => {
   return (
     <>
       <div className='form-container'>
-        <span className='close-btn'>×</span>
+      
        
         {!isSubmitted ? (
           <FormSignup submitForm={submitForm} />

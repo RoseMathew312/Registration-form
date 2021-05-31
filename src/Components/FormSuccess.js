@@ -8,7 +8,7 @@ const FormSuccess = () => {
       <h1 className='form-success'>Sucessfully Submitted the form</h1>
       
       
-      <i class="fa-solid fa-check"></i>
+      
     </div>
   );
 };
