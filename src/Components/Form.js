@@ -6,9 +6,11 @@ import FormSuccess from './FormSuccess';
 const Form = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+
   function submitForm() {
     setIsSubmitted(true);
   }
+  
   return (
     <>
       <div className='form-container'>
@@ -19,6 +21,8 @@ const Form = () => {
         ) : (
           <FormSuccess />
         )}
+        <br/>
+
       </div>
     </>
   );

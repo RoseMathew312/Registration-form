@@ -127,7 +127,7 @@
     cursor: pointer;
     background: linear-gradient(
       90deg,
-      rgb(39, 143, 255) 0%,
+      rgb(39, 255, 50) 0%,
       rgb(12, 99, 250) 100%
     );
     transition: all 0.4s ease-out;

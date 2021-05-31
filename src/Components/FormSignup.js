@@ -1,4 +1,5 @@
 import React, { useState ,useMemo} from 'react';
+import {Fragment} from 'react';
 
 import validate from './validateInfo';
 import useForm from './useForm';
@@ -7,16 +8,49 @@ import Select, { createFilter } from "react-select";
 import countryList from 'react-select-country-list';
 
 const FormSignup = ({ submitForm }) => {
-  const { handleChange, handleSubmit, values, errors } = useForm(
+  const { handleChange, values, errors } = useForm(
     submitForm,
     validate
   )
-  const [value, setValue] = useState('')
+  const [countries, setCountries] = useState("")
+  const [areaofInterest, setAreaOfInterest] = useState("")
 const options = useMemo(() => countryList().getData(), [])
 
 const changeHandler = value => {
-setValue(value)
+setCountries(value)
 }
+const handleSubmit = e => {
+  e.preventDefault();
+  let formattedValues=[values,countries,inputFields]
+  values["country"]=countries.label;
+  values["AreaofInterests"]=inputFields
+  console.log(values);
+
+  
+  };
+  
+const [inputFields, setInputFields] = useState([])
+ 
+const handleInputChange = (index, event) => {
+  const values = [...inputFields];
+  
+
+  setInputFields(values);
+};
+
+const handleAddFields = () => {
+  let values = [...inputFields,areaofInterest];
+ 
+  setInputFields(values);
+  setAreaOfInterest('');
+};
+
+const handleRemoveFields = index => {
+  const values = [...inputFields];
+  values.splice(index, 1);
+  setInputFields(values);
+};
+
 
   return (
     <div className='form-content-right'>
@@ -82,12 +116,79 @@ setValue(value)
             onChange={handleChange}
           />
         </div>
-        <div className='form-inputs'>
+         
+        <div className='form-row'>
+        {inputFields?(inputFields.map((inputField, index) => (
+            <Fragment key={`${inputField}~${index}`}>
+         
+          <div className="form-group col-sm-6">
+          <label className='form-label'>Area of Interests</label>
+          
+        
+          <input onChange={event => setAreaOfInterest(event)}
+  />
+          
+          <div className="form-group col-sm-2">
+                <button
+                  className="btn btn-link"
+                  type="button"
+                  onClick={() => handleRemoveFields(index)}
+                >
+                  -
+                </button>
+                <button
+                  className="btn btn-link"
+                  type="button"
+                  onClick={() => handleAddFields()}
+                >
+                  +
+                </button>
+              </div>
+        </div>
+        
+            </Fragment>)
+        
+          )):(<Fragment>
+         
+            <div className="form-group col-sm-6">
+            <label className='form-label'>Area of Interests</label>
+            
+          
+            <input onChange={event => setAreaOfInterest(event)}
+    />
+            
+            <div className="form-group col-sm-2">
+                  <button
+                    className="btn btn-link"
+                    type="button"
+                    onClick={() => handleRemoveFields(0)}
+                  >
+                    -
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    type="button"
+                    onClick={() => handleAddFields()}
+                  >
+                    +
+                  </button>
+                </div>
+          </div>
+          </Fragment>
+   
+   
+   
+               )}
+
+        </div>
+<div className='form-inputs'>
           <label className='form-label'>Country</label>
+          
+          
           <Select
 options={options}
 optionFilterProp="children"
-value={value}
+value={countries}
 onChange={changeHandler}
 filterOption={createFilter({ matchFrom: "start" })}
 />
@@ -96,7 +197,7 @@ filterOption={createFilter({ matchFrom: "start" })}
         <button className='form-input-btn' type='submit'>
           Sign up
         </button>
-        
+       
       </form>
     </div>
   );
