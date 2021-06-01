@@ -7,7 +7,10 @@ import Select, { createFilter } from "react-select";
 import countryList from "react-select-country-list";
 
 const FormSignup = ({ submitForm }) => {
-  const { handleChange, values, setValues,errors } = useForm(submitForm, validate);
+  const { handleChange, values, setValues, errors } = useForm(
+    submitForm,
+    validate
+  );
   const [countries, setCountries] = useState("");
   const [intrestValue, setIntrestValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
@@ -21,21 +24,18 @@ const FormSignup = ({ submitForm }) => {
     values["country"] = countries.label;
     values["areaofInterests"] = inputFields;
     console.log(values);
-    
-    alert('Sucessfully registered');
-    setValues({ username: '',
-    email: '',
-    password: '',
-    password2: '',Dateofbirth:''});
-    
-    setCountries(['']);
-   setInputFields(['']);
-   
-    
-   
 
+    alert("Sucessfully registered");
+    setValues({
+      username: "",
+      email: "",
+      password: "",
+      password2: "",
+      Dateofbirth: "",
+    });
 
-
+    setCountries([""]);
+    setInputFields([""]);
   };
 
   const handleAddFields = () => {
@@ -126,30 +126,31 @@ const FormSignup = ({ submitForm }) => {
               className="btn"
               type="button"
               onClick={() => handleAddFields()}
+              disabled={!intrestValue}
             >
               +
             </button>
-            
-              {inputFields?<ul>{inputFields.map((item, index) => (
-                
-                <li key={`${item}~${index}`} style={{ color: "white" }}>
-                  <div className="form-group col-sm-2">
-                    {item}{" "}
-                    <button
-                      className="deleteButton"
-                      type="button"
-                      onClick={() => handleRemoveFields(index)}
-                    >
-                      x
-                    </button>
-                  </div>
-                </li>
 
-                 
-              
-              ))}}
-            </ul>: ""
-            
+            {inputFields.length ? (
+              <ul>
+                {inputFields.map((item, index) => (
+                  <li key={`${item}~${index}`} style={{ color: "white" }}>
+                    <div className="form-group col-sm-2">
+                      {item}{" "}
+                      <button
+                        className="deleteButton"
+                        type="button"
+                        onClick={() => handleRemoveFields(index)}
+                      >
+                        x
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              ""
+            )}
           </div>
           <div className="form-inputs">
             <label className="form-label">Country</label>
@@ -167,6 +168,7 @@ const FormSignup = ({ submitForm }) => {
           Sign up
         </button>
       </form>
+     
     </div>
   );
 };
