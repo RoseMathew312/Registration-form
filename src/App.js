@@ -1,11 +1,24 @@
 import React from 'react';
 import './App.css';
-import Form from './Components/Form';
-
+import Button from './Components/Button';
 function App() {
-  return <Form />;
+  return (
+<div>
+<Button>Button</Button>
+<Button primary>Primary</Button>
+<Button secondary>Secondary</Button>
+</div>
+
+
+
+
+  );
+
+
+
+
+
 }
 
 export default App;
-
 
