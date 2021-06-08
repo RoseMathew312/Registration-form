@@ -1,19 +1,42 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components';
+
 const Button = styled.button`
-   ${props => props.primary ? "palevioletred" : "white"};
-  color: ${props => props.primary ? "white" : "palevioletred"};
-  ${props => props.secondary ? "Black" : "white"};
-  background-color: ${props => props.secondary ? "white" : "Black"};
+	
 
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 16px;
+font-size: 1em;
+margin: 1em;
+padding: 0.25em 1em;
+border: 2px solid palevioletred;
+border-radius: 3px;
+background:green;
+	${(props) =>
+		props.primary &&
+		css`
+			color: white;
+		`}
+	${(props) =>
+		props.outline &&
+		css`
+			background: white;
+			color: ${(props) => (props.color ? props.color : 'Blue')};
+			border: 2px solid ${(props) => (props.color ? props.color : 'Blue')};
+		`}
+		${(props) =>
+		props.pill &&
+		css`
+			border-radius: 20px;
+		`}
+		${(props) =>
+		props.square &&
+		css`
+			border-radius: 0px;
+		`}
+		${(props) =>
+		props.disabled &&
+		css`
+			opacity: 0.65;
+			cursor: not-allowed;
+		`};
 `;
-
-
-
-
 
 export default Button;
