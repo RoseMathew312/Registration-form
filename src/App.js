@@ -2,8 +2,8 @@ import React from 'react';
 import './App.css';
 import Button from './Components/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAppleAlt } from '@fortawesome/free-solid-svg-icons'
-import { faEye} from '@fortawesome/free-solid-svg-icons'
+import { faAppleAlt } from '@fortawesome/free-solid-svg-icons/faAppleAlt'
+import { faEye} from '@fortawesome/free-solid-svg-icons/faEye'
 function App() {
   return (
 <div>
