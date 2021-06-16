@@ -1,42 +1,33 @@
-import styled, { css } from 'styled-components';
+import React from "react";
 
-const Button = styled.button`
-	
+import Buttonstyle from "./Buttonstyle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAppleAlt } from "@fortawesome/free-solid-svg-icons/faAppleAlt";
+import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
+function App() {
+  return (
+    <div>
+      <Buttonstyle primary>Primary Button</Buttonstyle>
+      <Buttonstyle outline color="blue">
+        Outline Button
+      </Buttonstyle>
+      <Buttonstyle pill color="red">
+        Pill Button
+      </Buttonstyle>
+      <Buttonstyle square color="black">
+        Square Button
+      </Buttonstyle>
+      <Buttonstyle disabled>Disabled Button</Buttonstyle>
+      <Buttonstyle>
+        <FontAwesomeIcon icon={faAppleAlt} />
+        Buttonstyle
+      </Buttonstyle>
+      <Buttonstyle pill>
+        <FontAwesomeIcon icon={faEye} />
+        Buttonstyle
+      </Buttonstyle>
+    </div>
+  );
+}
 
-font-size: 1em;
-margin: 1em;
-padding: 0.25em 1em;
-border: 2px solid palevioletred;
-border-radius: 3px;
-background:green;
-	${(props) =>
-		props.primary &&
-		css`
-			color: white;
-		`}
-	${(props) =>
-		props.outline &&
-		css`
-			background: white;
-			color: ${(props) => (props.color ? props.color : 'Blue')};
-			border: 2px solid ${(props) => (props.color ? props.color : 'Blue')};
-		`}
-		${(props) =>
-		props.pill &&
-		css`
-			border-radius: 20px;
-		`}
-		${(props) =>
-		props.square &&
-		css`
-			border-radius: 0px;
-		`}
-		${(props) =>
-		props.disabled &&
-		css`
-			opacity: 0.65;
-			cursor: not-allowed;
-		`};
-`;
-
-export default Button;
+export default App;
