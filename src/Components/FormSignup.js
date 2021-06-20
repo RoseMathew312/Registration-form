@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-
-import "./Form.css";
+import styled from "styled-components";
+import { Right, Form, Inputs, Input, Button, Label } from "../Styled/Container";
 import Select, { createFilter } from "react-select";
 import countryList from "react-select-country-list";
 
@@ -146,13 +146,12 @@ const FormSignup = () => {
     genderErr,
   } = error;
   return (
-    <div className="form-content-right">
-      <form onSubmit={handleSubmit} className="form">
-        <h1>Hello!</h1>
-        <div className="form-inputs">
-          <label className="form-label">First Name</label>
-          <input
-            className="form-input"
+    <Right>
+      <Form onSubmit={handleSubmit}>
+        <h1>Registration Form</h1>
+        <Inputs>
+          <Label>First Name</Label>
+          <Input
             type="text"
             name="firstname"
             placeholder="Enter your FirstName"
@@ -161,16 +160,15 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {firstnameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
               {firstnameErr}
             </div>
           )}
-        </div>
+        </Inputs>
 
-        <div className="form-inputs">
-          <label className="form-label">Last Name</label>
-          <input
-            className="form-input"
+        <Inputs>
+          <Label>Last Name</Label>
+          <Input
             type="text"
             name="lastname"
             placeholder="Enter your LastName"
@@ -179,13 +177,14 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {lastnameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{lastnameErr}</div>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {lastnameErr}
+            </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">User Name</label>
-          <input
-            className="form-input"
+        </Inputs>
+        <Inputs>
+          <Label>User Name</Label>
+          <Input
             name="username"
             placeholder="Enter your username"
             value={values.username}
@@ -193,13 +192,14 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {usernameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{usernameErr}</div>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {usernameErr}
+            </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">E-mail</label>
-          <input
-            className="form-input"
+        </Inputs>
+        <Inputs>
+          <Label>E-mail</Label>
+          <Input
             type="email"
             name="email"
             placeholder="Enter your Email"
@@ -208,37 +208,38 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {emailErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{emailErr}</div>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {emailErr}
+            </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Area of Interests</label>
-          <input
-            className="form-input"
+        </Inputs>
+        <Inputs>
+          <Label>Area of Interests</Label>
+          <Input
             onChange={(event) => setIntrestValue(event.target.value)}
             value={intrestValue}
             onBlur={handleFormValidation}
           />
           {areaofInterestsErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
               {areaofInterestsErr}
             </div>
           )}
-        </div>
-        <button
-          className="btn"
+        </Inputs>
+        <Button
+          plus
           type="button"
           onClick={() => handleAddFields()}
           disabled={!intrestValue}
         >
           +
-        </button>
+        </Button>
 
         {inputFields.length ? (
           <ul>
             {inputFields.map((item, index) => (
               <li key={`${item}~${index}`} style={{ color: "white" }}>
-                <div className="form-group col-sm-2">
+                <div>
                   {item}{" "}
                   <button
                     className="deleteButton"
@@ -255,10 +256,9 @@ const FormSignup = () => {
           ""
         )}
 
-        <div className="form-inputs">
-          <label className="form-label">Mobile</label>
-          <input
-            className="form-input"
+        <Inputs>
+          <Label>Mobile</Label>
+          <Input
             type="number"
             name="phone"
             placeholder="Enter your number"
@@ -267,12 +267,16 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-        </div>
+          {phoneErr && (
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {phoneErr}
+            </div>
+          )}
+        </Inputs>
 
-        <div className="form-inputs">
-          <label className="form-label">Date of Birth</label>
-          <input
-            className="form-input"
+        <Inputs>
+          <Label>Date of Birth</Label>
+          <Input
             type="date"
             name="Date of birth"
             placeholder="Date of birth"
@@ -281,43 +285,54 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {dateofbirthErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
               {dateofbirthErr}
             </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Gender</label>
-          <input
+        </Inputs>
+        <Inputs radio>
+          <Label>Gender</Label>
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="male"
             onChange={handleChange}
           />
           Male
-          <input
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="female"
             onChange={handleChange}
           />
           Female
-          <input
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="other"
             onChange={handleChange}
           />
           Other
-        </div>
+        </Inputs>
         {genderErr && (
-          <div style={{ color: "red", paddingBottom: 10 }}>{genderErr}</div>
+          <div
+            style={{
+              color: "red",
+              marginTop: "10px",
+              fontSize: 13,
+              marginRight: "10em",
+            }}
+          >
+            {genderErr}
+          </div>
         )}
 
-        <div className="form-inputs">
-          <label className="form-label">Pincode</label>
-          <input
-            className="form-input"
+        <Inputs>
+          <Label>Pincode</Label>
+          <Input
             type="number"
             name="pincode"
             value={values.pincode}
@@ -325,24 +340,27 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {pincodeErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{pincodeErr}</div>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {pincodeErr}
+            </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Address</label>
-          <input
-            className="form-input"
+        </Inputs>
+        <Inputs>
+          <Label>Address</Label>
+          <Input
             name="address"
             value={values.address}
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
           {addressErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{addressErr}</div>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
+              {addressErr}
+            </div>
           )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Country</label>
+        </Inputs>
+        <Inputs>
+          <Label>Country</Label>
           <Select
             options={options}
             optionFilterProp="children"
@@ -351,17 +369,15 @@ const FormSignup = () => {
             filterOption={createFilter({ matchFrom: "start" })}
           />
           {countryListErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
+            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
               {countryListErr}
             </div>
           )}
-        </div>
+        </Inputs>
 
-        <button className="form-input-btn" type="submit">
-          Sign up
-        </button>
-      </form>
-    </div>
+        <Button signup>Sign up</Button>
+      </Form>
+    </Right>
   );
 };
 
