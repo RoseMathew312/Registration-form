@@ -1,10 +1,13 @@
 import React from "react";
-import "./App.css";
+import Button from "./Components/Button";
 import Form from "./Components/Form";
-import FormSignup from "./Components/FormSignup";
-
 function App() {
-  return <Form />;
+  return (
+    <div>
+      <Button />
+      <Form />
+    </div>
+  );
 }
 
 export default App;
