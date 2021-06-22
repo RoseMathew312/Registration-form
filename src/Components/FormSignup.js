@@ -1,45 +1,98 @@
-import React, { useState, useMemo } from "react";
-import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { registrationActions } from "../store/index";
 import { Right, Form, Inputs, Input, Button, Label } from "../Styled/Container";
 import Select, { createFilter } from "react-select";
 import countryList from "react-select-country-list";
 
 const FormSignup = () => {
-  const [values, setValues] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    dateofbirth: "",
-    phone: "",
-    pincode: "",
-    address: "",
-    countryList: "",
-    areaofInterests: "",
-    gender: "",
-  });
-  const [error, setError] = useState({});
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+  // const [values, setValues] = useState({
+  //   firstname: "",
+  //   lastname: "",
+  //   username: "",
+  //   email: "",
+  //   dateofbirth: "",
+  //   phone: "",
+  //   pincode: "",
+  //   address: "",
+  //   countryList: "",
+  //   areaofInterests: "",
+  //   gender: "",
+  // });
+  //const [error, setError] = useState({});
+  const formdata = useSelector((state) => state.values);
+  const error = useSelector((state) => state.error);
+  const interests = useSelector((state) => state.interests);
+  const inputFields = useSelector((state) => state.inputFields);
+  const options = useSelector((state) => state.options);
+  const dispatch = useDispatch();
+  const {
+    firstname,
+    lastname,
+    username,
+    email,
+    dateofbirth,
+    phone,
+    pincode,
+    address,
+    countryList,
+    areaofInterests,
+    gender,
+  } = formdata;
+
+  const handler = (event) => {
+    dispatch(
+      registrationActions.changeHandler({ countryList: event.target.innerText })
+    );
+    dispatch(registrationActions.countryList());
+    dispatch(registrationActions.errorHandler({ countryErr: null }));
   };
+
+  const eventChangeHandler = (event) => {
+    dispatch(
+      registrationActions.handleChange({
+        [event.target.name]: event.target.value,
+      })
+    );
+  };
+
+  const handleAddFields = () => {
+    let values = [...interests, inputFields];
+
+    dispatch(registrationActions.onChangeHandler({ areaofInterests: "" }));
+  };
+
+  const handleRemoveFields = (index) => {
+    const values = [...interests, inputFields];
+    values.splice(index, 1);
+    dispatch(registrationActions.areaofInterestRemove(values));
+  };
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+  };
+
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setValues({
+  //     ...values,
+  //     [name]: value,
+  //   });
+  // };
+
   const handleFormValidation = () => {
-    const {
-      firstname,
-      lastname,
-      username,
-      email,
-      dateofbirth,
-      phone,
-      pincode,
-      address,
-      countryList,
-      areaofInterests,
-      gender,
-    } = values;
+    // const {
+    //   firstname,
+    //   lastname,
+    //   username,
+    //   email,
+    //   dateofbirth,
+    //   phone,
+    //   pincode,
+    //   address,
+    //   countryList,
+    //   areaofInterests,
+    //   gender,
+    // } = values;
     let formErrors = {};
     let formIsValid = true;
     //First name
@@ -102,36 +155,36 @@ const FormSignup = () => {
       formErrors["countryListErr"] = "Country is required.";
     }
 
-    setError(formErrors);
+    error(formErrors);
     return formIsValid;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (handleFormValidation()) {
-      alert("successfully submitted");
-    }
-  };
-  const [value, setValue] = useState("");
-  const options = useMemo(() => countryList().getData(), []);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (handleFormValidation()) {
+  //     alert("successfully submitted");
+  //   }
+  // };
+  //const [value, setValue] = useState("");
+  //const options = useMemo(() => countryList().getData(), []);
 
-  const changeHandler = (value) => {
-    setValue(value);
-  };
+  // const changeHandler = (value) => {
+  //   setValue(value);
+  // };
 
-  const [inputFields, setInputFields] = useState([]);
-  const [intrestValue, setIntrestValue] = useState("");
-  const handleAddFields = () => {
-    let values = [...inputFields, intrestValue];
+  //const [inputFields, setInputFields] = useState([]);
+  //const [intrestValue, setIntrestValue] = useState("");
+  // const handleAddFields = () => {
+  //   let values = [...inputFields, intrestValue];
 
-    setIntrestValue("");
-    setInputFields(values);
-  };
-  const handleRemoveFields = (index) => {
-    const values = [...inputFields];
-    values.splice(index, 1);
-    setInputFields(values);
-  };
+  //   setIntrestValue("");
+  //   setInputFields(values);
+  // };
+  // const handleRemoveFields = (index) => {
+  //   const values = [...inputFields];
+  //   values.splice(index, 1);
+  //   setInputFields(values);
+  // };
   const {
     firstnameErr,
     lastnameErr,
@@ -147,7 +200,7 @@ const FormSignup = () => {
   } = error;
   return (
     <Right>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={submitHandler}>
         <h1>Registration Form</h1>
         <Inputs>
           <Label>First Name</Label>
@@ -155,8 +208,8 @@ const FormSignup = () => {
             type="text"
             name="firstname"
             placeholder="Enter your FirstName"
-            value={values.firstname}
-            onChange={handleChange}
+            value={firstname}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {firstnameErr && (
@@ -172,8 +225,8 @@ const FormSignup = () => {
             type="text"
             name="lastname"
             placeholder="Enter your LastName"
-            value={values.lastname}
-            onChange={handleChange}
+            value={lastname}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {lastnameErr && (
@@ -187,8 +240,8 @@ const FormSignup = () => {
           <Input
             name="username"
             placeholder="Enter your username"
-            value={values.username}
-            onChange={handleChange}
+            value={username}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {usernameErr && (
@@ -203,8 +256,8 @@ const FormSignup = () => {
             type="email"
             name="email"
             placeholder="Enter your Email"
-            value={values.email}
-            onChange={handleChange}
+            value={email}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {emailErr && (
@@ -216,8 +269,8 @@ const FormSignup = () => {
         <Inputs>
           <Label>Area of Interests</Label>
           <Input
-            onChange={(event) => setIntrestValue(event.target.value)}
-            value={intrestValue}
+            onChange={(event) => interests(event.target.value)}
+            value={areaofInterests}
             onBlur={handleFormValidation}
           />
           {areaofInterestsErr && (
@@ -230,7 +283,7 @@ const FormSignup = () => {
           plus
           type="button"
           onClick={() => handleAddFields()}
-          disabled={!intrestValue}
+          disabled={!interests}
         >
           +
         </Button>
@@ -263,8 +316,8 @@ const FormSignup = () => {
             name="phone"
             placeholder="Enter your number"
             maxLength="10"
-            value={values.phone}
-            onChange={handleChange}
+            value={phone}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {phoneErr && (
@@ -280,8 +333,8 @@ const FormSignup = () => {
             type="date"
             name="Date of birth"
             placeholder="Date of birth"
-            value={values.Dateofbirth}
-            onChange={handleChange}
+            value={dateofbirth}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {dateofbirthErr && (
@@ -297,7 +350,7 @@ const FormSignup = () => {
             type="radio"
             name="gender"
             value="male"
-            onChange={handleChange}
+            onChange={eventChangeHandler}
           />
           Male
           <Input
@@ -305,7 +358,7 @@ const FormSignup = () => {
             type="radio"
             name="gender"
             value="female"
-            onChange={handleChange}
+            onChange={eventChangeHandler}
           />
           Female
           <Input
@@ -313,7 +366,7 @@ const FormSignup = () => {
             type="radio"
             name="gender"
             value="other"
-            onChange={handleChange}
+            onChange={eventChangeHandler}
           />
           Other
         </Inputs>
@@ -335,8 +388,8 @@ const FormSignup = () => {
           <Input
             type="number"
             name="pincode"
-            value={values.pincode}
-            onChange={handleChange}
+            value={pincode}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {pincodeErr && (
@@ -349,8 +402,8 @@ const FormSignup = () => {
           <Label>Address</Label>
           <Input
             name="address"
-            value={values.address}
-            onChange={handleChange}
+            value={address}
+            onChange={eventChangeHandler}
             onBlur={handleFormValidation}
           />
           {addressErr && (
@@ -364,8 +417,8 @@ const FormSignup = () => {
           <Select
             options={options}
             optionFilterProp="children"
-            value={value}
-            onChange={changeHandler}
+            value={countryList}
+            onChange={handler}
             filterOption={createFilter({ matchFrom: "start" })}
           />
           {countryListErr && (
