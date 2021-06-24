@@ -26,6 +26,7 @@ const initialState = {
     countryListErr: "",
     genderErr: "",
   },
+  inputFields: [],
 };
 
 const registrationSlice = createSlice({
@@ -33,8 +34,9 @@ const registrationSlice = createSlice({
   initialState,
   reducers: {
     handleChange: (state, action) => {
-      state.values = { ...state.values, ...action.payload };
+      state.formdata = { ...state.formdata, ...action.payload };
     },
+
     changeHandler: (state, action) => {
       state.countryList = action.payload;
     },
@@ -42,10 +44,10 @@ const registrationSlice = createSlice({
       state.error = { ...state.error, ...action.payload };
     },
     handleAddFields: (state, action) => {
-      state.areaofInterests.push(action.payload);
+      state.interests.push(action.payload);
     },
     handleRemoveFields: (state, action) => {
-      state.areaofInterests = [...action.payload];
+      state.interests = [...action.payload];
     },
   },
 });

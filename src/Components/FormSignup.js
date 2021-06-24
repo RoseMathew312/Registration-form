@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registrationActions } from "../store/index";
 import { Right, Form, Inputs, Input, Button, Label } from "../Styled/Container";
@@ -70,6 +71,14 @@ const FormSignup = () => {
   const submitHandler = (event) => {
     event.preventDefault();
   };
+
+  // const handler = (event) => {
+  //   dispatch(
+  //     registrationActions.changeHandler({ countryList: event.target.innerText })
+  //   );
+  //   dispatch(registrationActions.countryList());
+  //   dispatch(registrationActions.errorHandler({ countryErr: null }));
+  // };
 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
@@ -165,15 +174,15 @@ const FormSignup = () => {
   //     alert("successfully submitted");
   //   }
   // };
-  //const [value, setValue] = useState("");
-  //const options = useMemo(() => countryList().getData(), []);
+  // const [value, setValue] = useState("");
+  // const options = useMemo(() => countryList().getData(), []);
 
   // const changeHandler = (value) => {
   //   setValue(value);
   // };
 
-  //const [inputFields, setInputFields] = useState([]);
-  //const [intrestValue, setIntrestValue] = useState("");
+  // const [inputFields, setInputFields] = useState([]);
+  // const [intrestValue, setIntrestValue] = useState("");
   // const handleAddFields = () => {
   //   let values = [...inputFields, intrestValue];
 
@@ -269,7 +278,7 @@ const FormSignup = () => {
         <Inputs>
           <Label>Area of Interests</Label>
           <Input
-            onChange={(event) => interests(event.target.value)}
+            handleChange={(event) => areaofInterests(event.target.value)}
             value={areaofInterests}
             onBlur={handleFormValidation}
           />
@@ -283,7 +292,7 @@ const FormSignup = () => {
           plus
           type="button"
           onClick={() => handleAddFields()}
-          disabled={!interests}
+          disabled={!areaofInterests}
         >
           +
         </Button>
