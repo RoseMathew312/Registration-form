@@ -2,7 +2,7 @@ import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import {
   Right,
-  Form,
+  FormGroup,
   Inputs,
   Input,
   Button,
@@ -155,7 +155,7 @@ const FormSignup = () => {
   } = error;
   return (
     <Right>
-      <Form onSubmit={handleSubmit}>
+      <FormGroup onSubmit={handleSubmit}>
         <h1>Registration Form</h1>
         <Inputs>
           <Label>First Name</Label>
@@ -333,7 +333,7 @@ const FormSignup = () => {
         </Inputs>
 
         <Button signup>Sign up</Button>
-      </Form>
+      </FormGroup>
     </Right>
   );
 };
