@@ -94,7 +94,12 @@ export const Label = styled.label`
   justify-content: flex-start;
   align-items: center;
 `;
-
+export const Style = styled.div`
+  color: red;
+  fontsize: 13;
+  margin-top: 0.5vh;
+  font-weight: 600;
+`;
 export const Button = styled.button`
   ${(props) =>
     props.signup &&

@@ -1,6 +1,14 @@
 import React, { useState, useMemo } from "react";
 import styled from "styled-components";
-import { Right, Form, Inputs, Input, Button, Label } from "../Styled/Container";
+import {
+  Right,
+  Form,
+  Inputs,
+  Input,
+  Button,
+  Label,
+  Style,
+} from "../Styled/Container";
 import Select, { createFilter } from "react-select";
 import countryList from "react-select-country-list";
 
@@ -159,11 +167,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {firstnameErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {firstnameErr}
-            </div>
-          )}
+          {firstnameErr && <Style>{firstnameErr}</Style>}
         </Inputs>
 
         <Inputs>
@@ -176,11 +180,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {lastnameErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {lastnameErr}
-            </div>
-          )}
+          {lastnameErr && <Style>{lastnameErr}</Style>}
         </Inputs>
         <Inputs>
           <Label>User Name</Label>
@@ -191,11 +191,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {usernameErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {usernameErr}
-            </div>
-          )}
+          {usernameErr && <Style>{usernameErr}</Style>}
         </Inputs>
         <Inputs>
           <Label>E-mail</Label>
@@ -207,11 +203,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {emailErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {emailErr}
-            </div>
-          )}
+          {emailErr && <Style>{emailErr}</Style>}
         </Inputs>
         <Inputs>
           <Label>Area of Interests</Label>
@@ -220,11 +212,7 @@ const FormSignup = () => {
             value={intrestValue}
             onBlur={handleFormValidation}
           />
-          {areaofInterestsErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {areaofInterestsErr}
-            </div>
-          )}
+          {areaofInterestsErr && <Style>{areaofInterestsErr}</Style>}
         </Inputs>
         <Button
           plus
@@ -267,11 +255,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {phoneErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {phoneErr}
-            </div>
-          )}
+          {phoneErr && <Style>{phoneErr}</Style>}
         </Inputs>
 
         <Inputs>
@@ -284,11 +268,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {dateofbirthErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {dateofbirthErr}
-            </div>
-          )}
+          {dateofbirthErr && <Style>{dateofbirthErr}</Style>}
         </Inputs>
         <Inputs radio>
           <Label>Gender</Label>
@@ -317,18 +297,7 @@ const FormSignup = () => {
           />
           Other
         </Inputs>
-        {genderErr && (
-          <div
-            style={{
-              color: "red",
-              marginTop: "10px",
-              fontSize: 13,
-              marginRight: "10em",
-            }}
-          >
-            {genderErr}
-          </div>
-        )}
+        {genderErr && <Style>{genderErr}</Style>}
 
         <Inputs>
           <Label>Pincode</Label>
@@ -339,11 +308,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {pincodeErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {pincodeErr}
-            </div>
-          )}
+          {pincodeErr && <Style>{pincodeErr}</Style>}
         </Inputs>
         <Inputs>
           <Label>Address</Label>
@@ -353,11 +318,7 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {addressErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {addressErr}
-            </div>
-          )}
+          {addressErr && <Style>{addressErr}</Style>}
         </Inputs>
         <Inputs>
           <Label>Country</Label>
@@ -368,11 +329,7 @@ const FormSignup = () => {
             onChange={changeHandler}
             filterOption={createFilter({ matchFrom: "start" })}
           />
-          {countryListErr && (
-            <div style={{ color: "red", fontSize: 13, marginTop: "1vh" }}>
-              {countryListErr}
-            </div>
-          )}
+          {countryListErr && <Style>{countryListErr}</Style>}
         </Inputs>
 
         <Button signup>Sign up</Button>
