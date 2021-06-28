@@ -1,6 +1,15 @@
 import React, { useState, useMemo } from "react";
-
-import "./Form.css";
+import styled from "styled-components";
+import {
+  Right,
+  Form,
+  FormGroup,
+  Inputs,
+  Input,
+  Button,
+  Label,
+  Style,
+} from "../Styled/Container";
 import Select, { createFilter } from "react-select";
 import countryList from "react-select-country-list";
 
@@ -146,13 +155,12 @@ const FormSignup = () => {
     genderErr,
   } = error;
   return (
-    <div className="form-content-right">
-      <form onSubmit={handleSubmit} className="form">
-        <h1>Hello!</h1>
-        <div className="form-inputs">
-          <label className="form-label">First Name</label>
-          <input
-            className="form-input"
+    <Right>
+      <Form onSubmit={handleSubmit}>
+        <h1>Registration Form</h1>
+        <FormGroup>
+          <Label>First Name</Label>
+          <Input
             type="text"
             name="firstname"
             placeholder="Enter your FirstName"
@@ -160,17 +168,12 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {firstnameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
-              {firstnameErr}
-            </div>
-          )}
-        </div>
+          {firstnameErr && <Style>{firstnameErr}</Style>}
+        </FormGroup>
 
-        <div className="form-inputs">
-          <label className="form-label">Last Name</label>
-          <input
-            className="form-input"
+        <FormGroup>
+          <Label>Last Name</Label>
+          <Input
             type="text"
             name="lastname"
             placeholder="Enter your LastName"
@@ -178,28 +181,22 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {lastnameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{lastnameErr}</div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">User Name</label>
-          <input
-            className="form-input"
+          {lastnameErr && <Style>{lastnameErr}</Style>}
+        </FormGroup>
+        <Inputs>
+          <Label>User Name</Label>
+          <Input
             name="username"
             placeholder="Enter your username"
             value={values.username}
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {usernameErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{usernameErr}</div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">E-mail</label>
-          <input
-            className="form-input"
+          {usernameErr && <Style>{usernameErr}</Style>}
+        </Inputs>
+        <FormGroup>
+          <Label>E-mail</Label>
+          <Input
             type="email"
             name="email"
             placeholder="Enter your Email"
@@ -207,38 +204,31 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {emailErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{emailErr}</div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Area of Interests</label>
-          <input
-            className="form-input"
+          {emailErr && <Style>{emailErr}</Style>}
+        </FormGroup>
+        <FormGroup>
+          <Label>Area of Interests</Label>
+          <Input
             onChange={(event) => setIntrestValue(event.target.value)}
             value={intrestValue}
             onBlur={handleFormValidation}
           />
-          {areaofInterestsErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
-              {areaofInterestsErr}
-            </div>
-          )}
-        </div>
-        <button
-          className="btn"
+          {areaofInterestsErr && <Style>{areaofInterestsErr}</Style>}
+        </FormGroup>
+        <Button
+          plus
           type="button"
           onClick={() => handleAddFields()}
           disabled={!intrestValue}
         >
           +
-        </button>
+        </Button>
 
         {inputFields.length ? (
           <ul>
             {inputFields.map((item, index) => (
               <li key={`${item}~${index}`} style={{ color: "white" }}>
-                <div className="form-group col-sm-2">
+                <div>
                   {item}{" "}
                   <button
                     className="deleteButton"
@@ -255,10 +245,9 @@ const FormSignup = () => {
           ""
         )}
 
-        <div className="form-inputs">
-          <label className="form-label">Mobile</label>
-          <input
-            className="form-input"
+        <FormGroup>
+          <Label>Mobile</Label>
+          <Input
             type="number"
             name="phone"
             placeholder="Enter your number"
@@ -267,12 +256,12 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-        </div>
+          {phoneErr && <Style>{phoneErr}</Style>}
+        </FormGroup>
 
-        <div className="form-inputs">
-          <label className="form-label">Date of Birth</label>
-          <input
-            className="form-input"
+        <FormGroup>
+          <Label>Date of Birth</Label>
+          <Input
             type="date"
             name="Date of birth"
             placeholder="Date of birth"
@@ -280,69 +269,60 @@ const FormSignup = () => {
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {dateofbirthErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
-              {dateofbirthErr}
-            </div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Gender</label>
-          <input
+          {dateofbirthErr && <Style>{dateofbirthErr}</Style>}
+        </FormGroup>
+        <FormGroup radio>
+          <Label>Gender</Label>
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="male"
             onChange={handleChange}
           />
           Male
-          <input
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="female"
             onChange={handleChange}
           />
           Female
-          <input
+          <Input
+            radio1
             type="radio"
             name="gender"
             value="other"
             onChange={handleChange}
           />
           Other
-        </div>
-        {genderErr && (
-          <div style={{ color: "red", paddingBottom: 10 }}>{genderErr}</div>
-        )}
+        </FormGroup>
+        {genderErr && <Style>{genderErr}</Style>}
 
-        <div className="form-inputs">
-          <label className="form-label">Pincode</label>
-          <input
-            className="form-input"
+        <FormGroup>
+          <Label>Pincode</Label>
+          <Input
             type="number"
             name="pincode"
             value={values.pincode}
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {pincodeErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{pincodeErr}</div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Address</label>
-          <input
-            className="form-input"
+          {pincodeErr && <Style>{pincodeErr}</Style>}
+        </FormGroup>
+        <FormGroup>
+          <Label>Address</Label>
+          <Input
             name="address"
             value={values.address}
             onChange={handleChange}
             onBlur={handleFormValidation}
           />
-          {addressErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>{addressErr}</div>
-          )}
-        </div>
-        <div className="form-inputs">
-          <label className="form-label">Country</label>
+          {addressErr && <Style>{addressErr}</Style>}
+        </FormGroup>
+        <FormGroup>
+          <Label>Country</Label>
           <Select
             options={options}
             optionFilterProp="children"
@@ -350,18 +330,12 @@ const FormSignup = () => {
             onChange={changeHandler}
             filterOption={createFilter({ matchFrom: "start" })}
           />
-          {countryListErr && (
-            <div style={{ color: "red", paddingBottom: 10 }}>
-              {countryListErr}
-            </div>
-          )}
-        </div>
+          {countryListErr && <Style>{countryListErr}</Style>}
+        </FormGroup>
 
-        <button className="form-input-btn" type="submit">
-          Sign up
-        </button>
-      </form>
-    </div>
+        <Button signup>Sign up</Button>
+      </Form>
+    </Right>
   );
 };
 
