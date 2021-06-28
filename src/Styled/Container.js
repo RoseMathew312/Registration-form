@@ -40,7 +40,7 @@ export const Form = styled.div`
   }
 `;
 
-export const Inputs = styled.div`
+export const FormGroup = styled.div`
   margin-bottom: 0.5rem;
   width: 100%;
   position: relative;

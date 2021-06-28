@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import styled from "styled-components";
 import {
   Right,
+  Form,
   FormGroup,
   Inputs,
   Input,
@@ -155,9 +156,9 @@ const FormSignup = () => {
   } = error;
   return (
     <Right>
-      <FormGroup onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <h1>Registration Form</h1>
-        <Inputs>
+        <FormGroup>
           <Label>First Name</Label>
           <Input
             type="text"
@@ -168,9 +169,9 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {firstnameErr && <Style>{firstnameErr}</Style>}
-        </Inputs>
+        </FormGroup>
 
-        <Inputs>
+        <FormGroup>
           <Label>Last Name</Label>
           <Input
             type="text"
@@ -181,7 +182,7 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {lastnameErr && <Style>{lastnameErr}</Style>}
-        </Inputs>
+        </FormGroup>
         <Inputs>
           <Label>User Name</Label>
           <Input
@@ -193,7 +194,7 @@ const FormSignup = () => {
           />
           {usernameErr && <Style>{usernameErr}</Style>}
         </Inputs>
-        <Inputs>
+        <FormGroup>
           <Label>E-mail</Label>
           <Input
             type="email"
@@ -204,8 +205,8 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {emailErr && <Style>{emailErr}</Style>}
-        </Inputs>
-        <Inputs>
+        </FormGroup>
+        <FormGroup>
           <Label>Area of Interests</Label>
           <Input
             onChange={(event) => setIntrestValue(event.target.value)}
@@ -213,7 +214,7 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {areaofInterestsErr && <Style>{areaofInterestsErr}</Style>}
-        </Inputs>
+        </FormGroup>
         <Button
           plus
           type="button"
@@ -244,7 +245,7 @@ const FormSignup = () => {
           ""
         )}
 
-        <Inputs>
+        <FormGroup>
           <Label>Mobile</Label>
           <Input
             type="number"
@@ -256,9 +257,9 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {phoneErr && <Style>{phoneErr}</Style>}
-        </Inputs>
+        </FormGroup>
 
-        <Inputs>
+        <FormGroup>
           <Label>Date of Birth</Label>
           <Input
             type="date"
@@ -269,8 +270,8 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {dateofbirthErr && <Style>{dateofbirthErr}</Style>}
-        </Inputs>
-        <Inputs radio>
+        </FormGroup>
+        <FormGroup radio>
           <Label>Gender</Label>
           <Input
             radio1
@@ -296,10 +297,10 @@ const FormSignup = () => {
             onChange={handleChange}
           />
           Other
-        </Inputs>
+        </FormGroup>
         {genderErr && <Style>{genderErr}</Style>}
 
-        <Inputs>
+        <FormGroup>
           <Label>Pincode</Label>
           <Input
             type="number"
@@ -309,8 +310,8 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {pincodeErr && <Style>{pincodeErr}</Style>}
-        </Inputs>
-        <Inputs>
+        </FormGroup>
+        <FormGroup>
           <Label>Address</Label>
           <Input
             name="address"
@@ -319,8 +320,8 @@ const FormSignup = () => {
             onBlur={handleFormValidation}
           />
           {addressErr && <Style>{addressErr}</Style>}
-        </Inputs>
-        <Inputs>
+        </FormGroup>
+        <FormGroup>
           <Label>Country</Label>
           <Select
             options={options}
@@ -330,10 +331,10 @@ const FormSignup = () => {
             filterOption={createFilter({ matchFrom: "start" })}
           />
           {countryListErr && <Style>{countryListErr}</Style>}
-        </Inputs>
+        </FormGroup>
 
         <Button signup>Sign up</Button>
-      </FormGroup>
+      </Form>
     </Right>
   );
 };
